@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Path, Query
 from app.services.products import get_all_products
+from pydantic import BaseModel, Field
+from app.schema.product import Product
 
 app = FastAPI()
 
@@ -40,3 +42,26 @@ def get_product_by_id(product_id:str = Path(..., description="The ID of the prod
         if product["id"] == product_id:
             return product
     raise HTTPException(status_code=404, detail=f"Product with id '{product_id}' not found")
+
+
+
+# class Product(BaseModel):
+#     id: str
+#     name: str
+#     # name: str = "Sameer"  # we can also give default value to the field like name: str = "Default Product Name"
+#     sku: Annotated [
+#         str,
+#         Field(
+#             description="Stock Keeping Unit - unique identifier for the product",
+#             example="SKU12345",
+#             min_length=5,
+#             max_length=20
+#         )]
+    
+# @app.post("/products", status_code=201)
+# def create_product(product: Product):
+#     return product
+
+@app.post("/products", status_code=201)
+def create_product(product: Product): # This Product word telling that my data should be in the format of Product class which is defined in product.py file and we are importing that class here in main.py file
+    return product
