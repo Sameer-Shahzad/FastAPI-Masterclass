@@ -6,7 +6,6 @@ from app.schema.product import Product
 app = FastAPI()
 
 @app.get("/")
-
 def read_root():
     return {"Hello": "World"}
 
@@ -36,7 +35,7 @@ def get_products(category: str = Query(default=None, min_length=1, max_length=50
             
         
 @app.get("/products/{product_id}")
-def get_product_by_id(product_id:str = Path(..., description="The ID of the product to retrieve", min_length=36, max_length=36, des="The ID of the product to retrieve", example="123e4567-e89b-12d3-a456-426614174000")):
+def get_product_by_id(product_id:str = Path(..., description="The ID of the product to retrieve", min_length=36, max_length=36, examples=["123e4567-e89b-12d3-a456-426614174000"])):
     products = get_all_products()
     for product in products:
         if product["id"] == product_id:
