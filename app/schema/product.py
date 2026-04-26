@@ -21,23 +21,50 @@ class Product(BaseModel):
             description="Stock Keeping Unit - unique identifier for the product",
             example="SKU12345",
             min_length=5,
-            max_length=20
+            max_length=50
         )]
-
-
-@field_validator("sku")
-def validate_sku(cls, value: str) -> str:
-    if not value.isupper():
-        raise ValueError("SKU must be uppercase")
+    price: float = Field(..., gt=0, description="Price of the product", example=19.99)
+    discount_percent: float = Field(0, ge=0, le=100, description="Discount percentage for the product", example=10.0)
+    description: str | None = None 
+    category: str
+    brand: str
+    stock: int = Field(..., ge=0)
+    is_active: bool = True
+    rating: float = Field(0, ge=0, le=5.0) 
+    tags: list[str] = []
+    image_urls: list[str] = []
     
-    pattern = r"^[0-9A-Z]{8}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{8}$"
-    if not re.match(pattern, value):
-        raise ValueError("SKU must be in the format XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX where X is an uppercase letter or a digit")
-    return value
+    dimensions_cm: dict[str, float] 
+    seller: dict[str, str | UUID]
+    
+    created_at: str 
 
 
-@model_validator(mode="after")
-def check_name_and_sku(self) -> Product:
-    if self.name.lower() == self.sku.lower():
-        raise ValueError("Product name should not be part of the SKU")
-    return self
+    @field_validator("sku")
+    def validate_sku(cls, value: str) -> str:
+        if not value.isupper():
+            raise ValueError("SKU must be uppercase")
+        
+        pattern = r"^[0-9A-Z]{8}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{12}$"
+        if not re.match(pattern, value):
+            raise ValueError("SKU must be in the format XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX where X is an uppercase letter or a digit")
+        return value
+
+
+    @model_validator(mode="after")
+    def check_name_and_sku(self) -> Product:
+        if self.name.lower() == self.sku.lower():
+            raise ValueError("Product name should not be part of the SKU")
+        return self
+    
+    @computed_field
+    @property
+    def final_price(self) -> float:
+        if self.discount_percent > 0:
+            return self.price * (1 - self.discount_percent / 100)
+        return self.price
+        
+        
+@app.post("/products", response_model=Product, status_code=201)
+async def create_product(product: Product):
+    return product
