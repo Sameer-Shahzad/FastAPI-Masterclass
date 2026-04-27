@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Path, Query
-from app.services.products import get_all_products
+from app.services.products import get_all_products, add_product
 from pydantic import BaseModel, Field
 from app.schema.product import Product
 
@@ -63,4 +63,16 @@ def get_product_by_id(product_id:str = Path(..., description="The ID of the prod
 
 @app.post("/products", status_code=201)
 def create_product(product: Product): # This Product word telling that my data should be in the format of Product class which is defined in product.py file and we are importing that class here in main.py file
+    try:
+        new_product = product.model_dump() 
+        add_product = add_product(new_product)
+        return add_product
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) 
     return product
+
+
+
+
+
+
