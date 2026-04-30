@@ -28,3 +28,14 @@ def add_product(product:Dict) -> None:
     products.append(product)
     save_product(products)
     return product
+
+
+def delete (id:str) -> str:
+    products = get_all_products()
+    for idx, product in enumerate(products):
+        if product["id"] == str(id):
+            delete_item = products.pop(idx)
+            save_product(products)
+            return f"Product with id '{id}' has been deleted"
+    raise ValueError(f"Product with id '{id}' not found")
+        

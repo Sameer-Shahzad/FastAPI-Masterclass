@@ -68,3 +68,5 @@ class Product(BaseModel):
 @app.post("/products", response_model=Product, status_code=201)
 async def create_product(product: Product):
     return product
+
+

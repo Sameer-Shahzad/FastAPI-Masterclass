@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Path, Query
-from app.services.products import get_all_products, add_product
+from app.services.products import get_all_products, add_product, delete
 from pydantic import BaseModel, Field
 from app.schema.product import Product
 
@@ -47,7 +47,7 @@ def get_product_by_id(product_id:str = Path(..., description="The ID of the prod
 # class Product(BaseModel):
 #     id: str
 #     name: str
-#     # name: str = "Sameer"  # we can also give default value to the field like name: str = "Default Product Name"
+#     # name: str = "Sameer" # we can also give default value to the field like name: str = "Default Product Name"
 #     sku: Annotated [
 #         str,
 #         Field(
@@ -61,18 +61,24 @@ def get_product_by_id(product_id:str = Path(..., description="The ID of the prod
 # def create_product(product: Product):
 #     return product
 
-@app.post("/products", status_code=201)
+
+
+@app.post("/products", status_code=201) 
 def create_product(product: Product): # This Product word telling that my data should be in the format of Product class which is defined in product.py file and we are importing that class here in main.py file
     try:
-        new_product = product.model_dump() 
-        add_product = add_product(new_product)
-        return add_product
+        new_product = product.model_dump(mode="json") 
+        
+        adding_product = add_product(new_product)
+        return adding_product
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e)) 
-    return product
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 
-
-
-
+@app.delete('/products/{product_id}')
+def remove_product(product_id: str = Path(..., description="The ID of the product to delete", min_length=36, max_length=36, examples=["123e4567-e89b-12d3-a456-426614174000"])):
+    try:
+        message = delete(product_id)
+        return {"message": message}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
