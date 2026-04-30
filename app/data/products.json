@@ -1,42 +1,7 @@
 [
     {
-        "id": "a2b2c3d4-e5f6-7890-abcd-1234567890ab",
-        "name": "WWE Elite Collection: The Undertaker",
-        "sku": "WWEELITE-UNDR-TAKR-20WM-000000000000",
-        "price": 2499.0,
-        "discount_percent": 10.0,
-        "description": "Authentic 6-inch scale action figure featuring Deluxe Articulation and iconic entrance gear.",
-        "category": "Action Figures",
-        "brand": "Mattel",
-        "stock": 15,
-        "is_active": true,
-        "rating": 4.9,
-        "tags": [
-            "WWE Elite",
-            "Undertaker",
-            "Phenom",
-            "Wrestling Toy"
-        ],
-        "image_urls": [
-            "https://cdn.wwe-toys.com/undertaker/front_pose.png"
-        ],
-        "dimensions_cm": {
-            "length": 15.2,
-            "width": 5.1,
-            "height": 2.5
-        },
-        "seller": {
-            "seller_id": "C9D8B7A6-5432-1098-FEBA-0987654321FE",
-            "name": "WWE Shop Official Store",
-            "email": "support@wweshop.com",
-            "website": "https://shop.wwe.com"
-        },
-        "created_at": "2026-04-30T10:00:00Z",
-        "final_price": 2249.1
-    },
-    {
         "id": "a3b2c3d4-e5f6-7890-abcd-1234567890ab",
-        "name": "WWE Elite Collection: The Undertaker",
+        "name": "WWE Elite Collection: The Undertaker and John Cena the 17th time wwe champion",
         "sku": "WWEELITE-UNDR-TAKR-20WM-000000000000",
         "price": 2499.0,
         "discount_percent": 10.0,
@@ -71,6 +36,76 @@
     },
     {
         "id": "a4b2c3d4-e5f6-7890-abcd-1234567890ab",
+        "name": "WWE Elite Collection: The Undertaker",
+        "sku": "WWEELITE-UNDR-TAKR-20WM-000000000000",
+        "price": 2499.0,
+        "discount_percent": 10.0,
+        "description": "Authentic 6-inch scale action figure featuring Deluxe Articulation and iconic entrance gear.",
+        "category": "Action Figures",
+        "brand": "Mattel",
+        "stock": 15,
+        "is_active": true,
+        "rating": 4.9,
+        "tags": [
+            "WWE Elite",
+            "Undertaker",
+            "Phenom",
+            "Wrestling Toy"
+        ],
+        "image_urls": [
+            "https://cdn.wwe-toys.com/undertaker/front_pose.png"
+        ],
+        "dimensions_cm": {
+            "length": 15.2,
+            "width": 5.1,
+            "height": 2.5
+        },
+        "seller": {
+            "seller_id": "C9D8B7A6-5432-1098-FEBA-0987654321FE",
+            "name": "WWE Shop Official Store",
+            "email": "support@wweshop.com",
+            "website": "https://shop.wwe.com"
+        },
+        "created_at": "2026-04-30T10:00:00Z",
+        "final_price": 2249.1
+    },
+    {
+        "id": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+        "name": "WWE Elite Collection: The Undertaker",
+        "sku": "WWEELITE-UNDR-TAKR-20WM-000000000000",
+        "price": 2499.0,
+        "discount_percent": 10.0,
+        "description": "Authentic 6-inch scale action figure featuring Deluxe Articulation and iconic entrance gear.",
+        "category": "Action Figures",
+        "brand": "Mattel",
+        "stock": 15,
+        "is_active": true,
+        "rating": 4.9,
+        "tags": [
+            "WWE Elite",
+            "Undertaker",
+            "Phenom",
+            "Wrestling Toy"
+        ],
+        "image_urls": [
+            "https://cdn.wwe-toys.com/undertaker/front_pose.png"
+        ],
+        "dimensions_cm": {
+            "length": 15.2,
+            "width": 5.1,
+            "height": 2.5
+        },
+        "seller": {
+            "seller_id": "C9D8B7A6-5432-1098-FEBA-0987654321FE",
+            "name": "WWE Shop Official Store",
+            "email": "support@wweshop.com",
+            "website": "https://shop.wwe.com"
+        },
+        "created_at": "2026-04-30T10:00:00Z",
+        "final_price": 2249.1
+    },
+    {
+        "id": "a6b2c3d4-e5f6-7890-abcd-1234567890ab",
         "name": "WWE Elite Collection: The Undertaker",
         "sku": "WWEELITE-UNDR-TAKR-20WM-000000000000",
         "price": 2499.0,

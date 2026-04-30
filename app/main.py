@@ -1,5 +1,5 @@
-from fastapi import FastAPI, HTTPException, Path, Query
-from app.services.products import get_all_products, add_product, delete
+from fastapi import FastAPI, HTTPException, Path, Query, Body
+from app.services.products import get_all_products, add_product, delete, change_product
 from pydantic import BaseModel, Field
 from app.schema.product import Product
 
@@ -64,7 +64,7 @@ def get_product_by_id(product_id:str = Path(..., description="The ID of the prod
 
 
 @app.post("/products", status_code=201) 
-def create_product(product: Product): # This Product word telling that my data should be in the format of Product class which is defined in product.py file and we are importing that class here in main.py file
+def create_product(product: Product = Body(..., description="The product data to create")): # This Product word telling that my data should be in the format of Product class which is defined in product.py file and we are importing that class here in main.py file
     try:
         new_product = product.model_dump(mode="json") 
         
@@ -82,3 +82,18 @@ def remove_product(product_id: str = Path(..., description="The ID of the produc
         return {"message": message}
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+    
+
+@app.put('/products/{product_id}')
+def update_product(
+    product_id: str = Path(..., min_length=36, max_length=36), 
+    updated_product: Product = Body(...)
+):
+  try:
+        product_dict = updated_product.model_dump(mode="json")    
+        
+        message = change_product(product_id, product_dict)
+        return {"message": message}
+        
+  except ValueError as e:
+    raise HTTPException(status_code=404, detail=str(e))

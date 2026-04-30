@@ -39,3 +39,16 @@ def delete (id:str) -> str:
             return f"Product with id '{id}' has been deleted"
     raise ValueError(f"Product with id '{id}' not found")
         
+        
+def change_product(id:str, updated_product:Dict) -> str:
+    products = get_all_products()
+    
+    for index, item in enumerate(products):
+        if item and str(item.get("id")) == str(id):
+            products[index].update(updated_product)
+            
+            save_product(products)
+            
+            return f"Product with ID {id} updated successfully."
+
+    raise ValueError(f"Product with ID {id} not found.")
