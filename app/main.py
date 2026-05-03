@@ -1,9 +1,24 @@
 from fastapi import FastAPI, HTTPException, Path, Query, Body
+# from fastapi.middleware.cors import CORSMiddleware  # This is used to allow cross-origin requests from different domains, which is common in web applications where the frontend and backend are hosted separately.
 from app.services.products import get_all_products, add_product, delete, change_product
 from pydantic import BaseModel, Field
 from app.schema.product import Product
+from app.database import engine
+from app import models 
+
+
+
+models.Base.metadata.create_all(bind=engine) # This line is used to create the tables in the database based on the models defined in the models.py file. It uses the metadata from the Base class to create the tables in the database. The bind=engine argument tells SQLAlchemy which database engine to use for creating the tables.     
 
 app = FastAPI()
+
+# CORS (Cross-Origin Resource Sharing) middleware configuration to allow requests from different origins. This is important for frontend applications that may be hosted on a different domain than the backend API.
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # Allow all origins, you can specify specific origins if needed
+#     allow_methods=["*"],  # Allow all HTTP methods, but try to specify only the methods you need for better security
+#     allow_headers=["*"],  # Allow all headers
+# )   
 
 @app.get("/")
 def read_root():
